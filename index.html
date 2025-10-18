@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Force Checkin Devices</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="forceCheckin.js"></script>
+</head>
+
+<body>
+    <h1 class="title">Force Checkin Devices</h1>
+    <div class="container">
+        <div class="input-container">
+            <textarea id="insert_devices" class="textarea" placeholder="Enter Device IDs, one per line..."></textarea>
+            <button id="generateButton" onclick="executeForceCheckin()">Generate Force Checkin
+                Commands</button>
+        </div>
+    </div>
+    <h1 class="title" id="result">Generated Commands</h1>
+    <div id="output"></div>
+</body>
+
+</html>
