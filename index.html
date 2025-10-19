@@ -11,16 +11,26 @@
 
 
 <body>
-    <h1>Credentials Ivanti</h1>
+    <header class="header">
+        <h2 class="header-title">Force Checkin Devices</h2>
+    </header>
     <div class="credentials-container">
-        <input type="text" id="username" placeholder="Username">
-        <input type="password" id="password" placeholder="Password">
-        <button id="saveCredentials" onclick="saveCredentials()">Save Credentials</button>
+        <h1>Credentials Ivanti</h1>
+        <p>Your credentials are stored locally in your browser's local storage for convenience. They only will be
+            transmitted through the server as a hash value</p>
+        <input type="text" id="username" class="input-field" placeholder="Username">
+        <input type="password" id="password" class="input-field" placeholder="Password">
+        <button id="saveCredentials"
+            title="this will only generate a sequence with your data to pass to api as basic authorization"
+            onclick="saveCredentials()">Generate authentication</button>
+        <div id="credentialsKey"></div>
     </div>
 
-    <h1 class="title">Force Checkin Devices</h1>
-    <div class="container">
-        <div class="input-container">
+
+    <div class="container-textarea">
+        <hr>
+        <h1 class="title">Insert the devices ID to generate the form data to be sent to force checkin API</h1>
+        <div class="container-textarea">
             <textarea id="insert_devices" class="textarea" placeholder="Enter Device IDs, one per line..."></textarea>
             <button id="generateButton" onclick="executeForceCheckin()">Generate Force Checkin
                 Commands</button>

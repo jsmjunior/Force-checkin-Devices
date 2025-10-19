@@ -2,6 +2,7 @@ const url = "https://eu1.mobileiron.com/";
 const forceCheckinEndpoint = "api/v1/devices/forceCheckin";
 let devices_info = [];
 let credentials = localStorage.getItem('apiCredentials') || '';
+
 function getDevices() {
     const input = document.getElementById('insert_devices').value;
     devices_info = input.split('\n').map(item => item.trim()).filter(item => item !== '');
@@ -36,6 +37,10 @@ async function executeForceCheckin() {
 
 }
 function saveCredentials() {
+    let button = document.getElementById("saveCredentials");
+    button.classList.add("saved");
+    button.innerText = "Credentials Saved!";
+    button.disabled = true;
     const credentials = btoa(`${document.getElementById('username').value}:${document.getElementById('password').value}`);
     localStorage.setItem('apiCredentials', credentials);
 }
