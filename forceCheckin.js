@@ -24,16 +24,12 @@ function uptdateOptions() {
 function updateDeviceData() {
     const input = document.getElementById('insert_devices').value;
     devices_info = input.split('\n').map(item => item.trim()).filter(item => item !== '');
+
 }
 
 async function executeForceCheckin() {
     updateDeviceData();
-
-    let formData = new FormData();
-    devices_info.forEach(element => {
-        formData.append('ids', element);
-    });
-    callApiForDeviceForceCheckin(formData);
+    callApiForDeviceForceCheckin();
 
 }
 function saveCredentials() {
@@ -48,16 +44,20 @@ function getCredentials() {
     return localStorage.getItem('apiCredentials') || '';
 }
 
-function callApiForDeviceForceCheckin(formData) {
+function callApiForDeviceForceCheckin() {
+    const formDataRequest = new URLSearchParams();
+    devices_info.forEach(element => {
+        formDataRequest.append('ids', element);
+    });
+    formDataRequest.append('auth', getCredentials());
 
-    fetch(`${url}${forceCheckinEndpoint}`, {
+    fetch(`http://localhost:8080/ivanti/forceCheckin`, {
         method: 'PUT',
         headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': 'Basic ' + getCredentials()
+            'Content-Type': 'application/x-www-form-urlencoded',
+            
         },
-        body: JSON.stringify({ ids: devices_info })
+        body: formDataRequest.toString()
     })
         .then(response => response.json())
         .then(data => {
